@@ -1,5 +1,21 @@
-template-repository (1.0-1) unstable; urgency=medium
+lua-nginx-memcached (0.14-1.1) unstable; urgency=medium
 
-  * Initial release
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Holger Levsen <holger@debian.org>  Sat, 09 Jan 2021 11:57:24 +0100
+
+lua-nginx-memcached (0.14-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refreshed package standards:
+    - Updated watchfile
+    - Bump up standard versions.
+
+ -- Ulises Vitulli <dererk@debian.org>  Fri, 08 Feb 2019 13:02:53 -0300
+
+lua-nginx-memcached (0.10-1) unstable; urgency=low
+
+  * Initial release. (Closes: #693098)
+
+ -- Ulises Vitulli <dererk@debian.org>  Wed, 28 Nov 2012 19:21:11 -0300
