@@ -1,0 +1,793 @@
+commit 2564138c76e3307711e8d0eb14e8f07cba318097
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 27 13:44:48 2016 -0800
+
+    optimize: reduced table.concat() calls while constructing memcached requests, which can lead to fewer Lua string creation operations.
+
+commit 3ae28d1c0c3d97477a169a30fd454e3cc5e89ec7
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 27 13:42:16 2016 -0800
+
+    bugfix: get() did not return server error responses. thanks Lorenz Bauer for the report.
+
+commit 5fb6da02eeff4b467d339321e83cafcb1cfd35fd
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 27 13:29:46 2016 -0800
+
+    bugfix: gets() did not return server error responses. thanks Lorenz Bauer for the report.
+
+commit 00cddf2bceaa1f3df02c9015c9683b2b9f6e83b4
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 27 13:23:17 2016 -0800
+
+    updated tests to reflect recent changes.
+
+commit cd069e911400bd543937dec2e886282d06c085ad
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 27 13:21:50 2016 -0800
+
+    get(): simplified the error messages so that the caller can check the error more easily.
+
+commit de35ff86981006bd21edacc6d28b322ecefbd3ab
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Mon Jan 25 15:20:53 2016 -0800
+
+    doc: various updates.
+
+commit f9be0cc2d03c7f656d9db44ff58697d1d0c979fe
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Mon Nov 23 23:24:36 2015 +0800
+
+    added a .gitattributes file to correct GitHub's language tag.
+
+commit ce28d2409b20e06e33dc5a33605786e7d2b2594f
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Aug 28 12:13:37 2014 -0700
+
+    feature: set_timeout() now returns the result of the operation. thanks Guanlan Dai for the report.
+
+commit 7975df1ac14ef4e4919776ebf1db17632c1a6de0
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Tue Apr 1 14:47:49 2014 -0700
+
+    suppressed a false positive in libdl.
+
+commit 88d9022fc5a45f6c444f91e82ec8d1fb2a4d3bfe
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Fri Jan 10 16:58:24 2014 -0800
+
+    doc: updated the copyright year.
+
+commit 89a37a4e5ac208268753aa269b049b905ceb9186
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Fri Jan 10 16:55:46 2014 -0800
+
+    bumped version to 0.13.
+
+commit 750505f717b87dee784c56df05048b18a17b305d
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Wed Jan 8 12:44:26 2014 -0800
+
+    fixed a test case that could fail in slow testing mode.
+
+commit 5a0db168493c51df2647b069771861238e359f76
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Tue Dec 24 16:57:55 2013 -0800
+
+    optimize: saved one cosocket receive() call in the get() and gets() methods.
+
+commit a1770687186484ac333625a006dfc6a44a1488ae
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Tue Dec 24 16:34:55 2013 -0800
+
+    bugfix: the memcached connection might enter a bad state when read timeout happens because ngx_lua's cosocket reading calls no longer automatically close the connection in this case. thanks Dane Knecht for the report.
+
+commit 599a5f73f48722096357a618166ecb097f85ba97
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Dec 5 14:56:30 2013 -0800
+
+    use Test::Nginx::Socket::Lua instead of Test::Nginx::Socket in our test suite so that we can run existing tests with lua-resty-core.
+
+commit 4cada021d390da89564473d1f11d0034e3567e85
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Oct 27 17:49:01 2013 -0700
+
+    doc: markdown formatting fixes.
+
+commit 98876a491ba1a97e9d640188ca00510752ddb778
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Oct 27 17:31:52 2013 -0700
+
+    doc: added Table of Contents.
+
+commit c517d74a50e33bc8144dc864d4d35dea581ba311
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Oct 27 16:11:40 2013 -0700
+
+    doc: various formatting improvements.
+
+commit c3b05d76a24615596830a3a5afdbb7fa4bf11f01
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Oct 3 11:06:43 2013 -0700
+
+    docs: added new section "Automatic Error Logging".
+
+commit e53e7853499f89fdbd7eb24fa0ce0860edab2ef0
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Sep 22 23:51:40 2013 -0700
+
+    optimize: no longer use lua tables and table.concat() to construct simple memcached query strings. this gives 6.75t/foo.t_ overall speed up for trivial set + get examples when LuaJIT 2.0.2 is used.
+
+commit ed2bcb3c458059e383d7d7b1fabb489f2aee5a6a
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Sep 22 23:24:13 2013 -0700
+
+    bumped version to 0.12.
+
+commit 4cba65cf753d4038497c82589346aa11ddfca586
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Sun Sep 22 14:32:12 2013 -0700
+
+    docs: use limited (10 sec) max idel timeout for in-pool connections in the code sample.
+
+commit fce69f1fa570b543e51175434894494553927471
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Sep 19 13:43:56 2013 -0700
+
+    optimize: eliminated table.insert() because it is slower than "tb[#tb + 1] = val".
+
+commit 2f7d5dd5c3b45e4ec1bf7c138a8765ab83d24ff1
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Sep 19 13:38:41 2013 -0700
+
+    refactor: avoided using Lua's module() function for defining our Lua modules because it has bad side effects.
+
+commit 5c228d322f3a7a232d19bc75778257a38c9dd770
+Author: Yichun Zhang (agentzh) <agentzh@gmail.com>
+Date:   Thu Sep 19 13:35:35 2013 -0700
+
+    updated the copyright notice.
+
+commit 10abe2f0d0cba6cfbdae22d48cd70df4c890d9bc
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Thu Apr 11 11:31:00 2013 -0700
+
+    docs: check the return values of the "set_keepalive" method.
+
+commit a40906dd0236bafad75fea704449312d4d31e981
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Wed Mar 27 12:43:44 2013 -0700
+
+    bumped version to 0.11.
+
+commit af8343756051188c4c5cb92be9879c17d402f487
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Mar 26 18:31:34 2013 -0700
+
+    made a test less possible to fail in slow testing mode.
+
+commit 2798959f462b9c8e2d61329fb159130d4e28e397
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Mar 26 12:29:15 2013 -0700
+
+    typo in docs.
+
+commit 5d30dc85846a38aef18a1efea27afb0bf4e76ebe
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Mar 26 12:26:48 2013 -0700
+
+    feature: added new method "touch" for the new memcached command "touch". thanks merlin for the patch in pull #5.
+
+commit d6e69448700a37e62f3a6e50361b9a325d1de153
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Fri Nov 23 21:40:14 2012 -0800
+
+    docs: be more explicit on the set_keepalive method.
+
+commit 663edcafed45fc742210d369890b899b91fc7693
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sun Nov 11 11:12:08 2012 -0800
+
+    bumped version to 0.10.
+
+commit f96665dd86686d8df8c45b04efd90ae59f5dcc96
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sat Nov 10 12:57:52 2012 -0800
+
+    updated my name in the copyright notice.
+
+commit 9ba31fb0182a8efd472140f6ea2d404fdfd55b79
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sat Nov 10 12:38:54 2012 -0800
+
+    refactor: made internal functions "local" functions.
+
+commit 00042b32dbf84461903985be65ac7ef8dfcdfd90
+Merge: 6a44f2b 5999029
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sat Nov 10 12:33:47 2012 -0800
+
+    Merge branch 'master' of github.com:agentzh/lua-resty-memcached
+
+commit 6a44f2b9d24dfa60b82183bcda0674d286aa10c5
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sat Nov 10 12:33:38 2012 -0800
+
+    refactor: avoided package.seeall in module definitions.
+
+commit 5999029682be96444ce441857f1ee61780a80262
+Merge: 0fd893a b996e27
+Author: Yichun Zhang <agentzh@gmail.com>
+Date:   Tue Nov 6 11:05:21 2012 -0800
+
+    Merge pull request #4 from cyberty/master
+    
+    fix some typo in README.markdown
+
+commit b996e2710fee7b6edc0b4f16b28b6293d66fbb7e
+Author: cyberty <cyberty@gmail.com>
+Date:   Wed Nov 7 02:46:57 2012 +0800
+
+    fix typo: "redis" should be "memcached"
+
+commit 0fd893ad10a111f738dd4a4909b484b8a95732c1
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Wed Oct 17 15:03:12 2012 -0700
+
+    bumped version to 0.09.
+
+commit 3bab7e360033af3580b1365d966dd613d578d913
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Oct 16 16:27:10 2012 -0700
+
+    we no longer dump the lua traceback in Lua because ngx_lua will auoatmically do that for us in case of failures.
+
+commit 38db3e8d001b4965db932f62503ea5acb2d0a14e
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Oct 16 16:16:53 2012 -0700
+
+    optimize: we now use Lua's own table.concat() to do string concatenation for all the memcached requests instead of relying on the cosocket API (on the C level) because calling the Lua C API is much slower especially when LuaJIT is used. now for simple lua-resty-memcached test cases loaded by "ab -k -c10", we get 11.3% overall speedup.
+
+commit 3bc010d7f8bb1b78fe46129f8d9419e4053bc123
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Oct 16 16:13:41 2012 -0700
+
+    fixed the test case for the memcached "quit" command: we could get the error "connection reset by peer".
+
+commit be8c589f7491cf87f33e51d1dc0880cb4921c2d6
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Tue Oct 16 16:12:54 2012 -0700
+
+    updated .gitignore a bit.
+
+commit d362bcd013d2564e74d0ab4d98321f4a48f8bc49
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Mon Sep 17 16:08:27 2012 -0700
+
+    bumped version to 0.08.
+
+commit a0789c4cc9bd92e69e366bb18378de3f0517f2a1
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Mon Sep 17 15:34:28 2012 -0700
+
+    style: minor indentation fixes.
+
+commit fe0eedea4001523bf5cfc3f0a0b8c0c93f02ef71
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Mon Sep 17 15:32:04 2012 -0700
+
+    feature: added new option "key_transform" to the "new" method to allow the user to override the default escaping and unescaping methods for memcached keys. thanks Matthieu Tourne for the patch in github pull #3.
+
+commit 463ae937894ae2ff269face67c688975f337d21a
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Mon Sep 17 11:50:36 2012 -0700
+
+    removed the sendmsg/ngx_channel valgrind suppression rules.
+
+commit 88bc8787a7f47436161c041b1fcdc1a102a10be9
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Thu Aug 23 11:40:18 2012 -0700
+
+    fixed tests for the mockeagain testing modes.
+
+commit 43362fb8daff520ed59612baeed79516d50c5440
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Wed Aug 22 21:42:47 2012 -0700
+
+    added tests for using the embeded TCP server to mock invalid memcached replies for the flush_all command.
+
+commit bc76dbb9aa68e7b170fe2cfb6f96abac87ceb0a7
+Author: agentzh (Yichun Zhang) <agentzh@gmail.com>
+Date:   Sun Aug 19 15:45:41 2012 -0700
+
+    docs: added more documentation for the set_keepalive method.
+
+commit 449e7bbceaf012800d1028cd0f90bfa1b12a45e2
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Jul 31 12:13:59 2012 -0700
+
+    cleaned up the code to reduce duplication.
+
+commit 543e2038a7ce2754b9c1664d3746f125fe718434
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Jul 31 11:20:13 2012 -0700
+
+    bugfix: now memcached:new() will return a string describing the error as the second return value in case of failures.
+
+commit af587cd8584b69ac295709da38d622abb69ed073
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Jul 10 17:12:51 2012 -0700
+
+    fixed a test case to reflect recent changes in ngx_lua.
+
+commit bd58e0db9fdb1cbe31ccb6113d0943c916aed2a6
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Jul 7 21:19:35 2012 -0700
+
+    fixed a test case because ngx_lua now can give detailed error messages for send() and receive().
+
+commit e5a882d0a3f9bed059c7e356f0c0a220a0f85f63
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Jul 3 10:17:37 2012 -0700
+
+    fixed a typo in README. thanks Sparsh Gupta.
+
+commit 8b51854cf8730985ca5f19e67b282854e8376756
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Jun 2 10:17:12 2012 +0800
+
+    updated valgrind.suppress for linux i386.
+
+commit c7863681968b9b0fb8340d6c676da640c6cac16b
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Fri Jun 1 18:30:23 2012 +0800
+
+    updated valgrind.suppress for the "hup reload" + valgrind/memcheck testing mode.
+
+commit 44e41a089e24b5417e819a90a3d1c369e98a8f27
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu May 31 20:55:14 2012 +0800
+
+    README: minor fixes.
+
+commit b1f39c1a79db6174076f5a29100058107a763b50
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu May 31 20:52:01 2012 +0800
+
+    documented that storing the object instance into lua module-level variables will result in failures for concurrent requests.
+
+commit c066c3e8d0cf69885cf299511ce7785bfd53905e
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Wed May 30 15:38:49 2012 +0800
+
+    documented that this lib cannot be used in those contexts where the cosocket API is unavailable.
+
+commit 58808d5e17646c1792dc4196545d388da1dd1004
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue May 29 14:43:56 2012 +0800
+
+    README: updated minimum versions of ngx_lua or ngx_openresty that we require.
+
+commit 1eb189fea45d4191c36e936e90f7fab407352c81
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue May 15 17:31:54 2012 +0800
+
+    README: claimed that we are production ready.
+
+commit 21dcc990d506f1aa1669308463b3206247d0f3d8
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Fri May 11 19:01:03 2012 +0800
+
+    bumped version number to 0.07.
+
+commit f2c9fa81476031efd00ffe53640bade7ad62ca88
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun May 6 16:48:42 2012 +0800
+
+    docs: documented the table-typed value argument support.
+
+commit df48eddc10f73863ee9db007f73bead057fc01bb
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun May 6 16:29:04 2012 +0800
+
+    minor coding style fixes in pull request #2 (Adds support for passing a table as the value to _store).
+
+commit 6f7c63922cf691de574ca0f52e8b365d98b07616
+Merge: 8b37b4c 522411a
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun May 6 01:20:41 2012 -0700
+
+    Merge pull request #2 from bakins/set-table
+    
+    Set table
+
+commit 522411a00a10aea9538f261391a9e2c1177fd51d
+Author: Brian Akins <brian@akins.org>
+Date:   Sat May 5 09:52:14 2012 -0400
+
+    tests for table set
+
+commit 297bf0aa4128db79478b5019e55036778ad7356e
+Author: Brian Akins <brian@akins.org>
+Date:   Sat May 5 06:50:37 2012 -0700
+
+    allow table values to _store
+
+commit 8b37b4c1c105c8afbf7c4ee68d92b32bb12f3ce2
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Apr 29 12:14:48 2012 +0800
+
+    README: updated the minimum version of ngx_lua and ngx_openresty that we require.
+
+commit 637f0532184b3452400ea5119e2ef844fa94cd4b
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Apr 28 23:29:50 2012 +0800
+
+    made tests less possible to fail in mockeagain and/or memcheck mode.
+
+commit 8ad3710d85665a20fca83321a7871d5abcf1a3eb
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Apr 28 23:02:17 2012 +0800
+
+    updated valgrind.suppress.
+
+commit d7da4e71459a91a387b1ed87a35f19433549aef7
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Apr 28 16:53:21 2012 +0800
+
+    fixed timeout settings in the tests to prevent false alarms when running tests with mockeagain and memcheck.
+
+commit 01f9923af9369e9ada96cfccc6bfb42ba498b7bf
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Wed Feb 29 15:03:58 2012 +0800
+
+    feature: added _VERSION field. also bumped version number to 0.06.
+
+commit 5dee1407907ea464078505efe563abd7e3f311dc
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 28 21:58:50 2012 +0800
+
+    updated Makefile.
+
+commit 811675ca7c95818a9cdf4e69da37bf364736db94
+Merge: 3229561 3119e55
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 28 16:57:45 2012 +0800
+
+    Merge branch 'master' of github.com:agentzh/lua-resty-memcached
+
+commit 3229561539b66c0e8c1fa062fbf913931bd66bfb
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 28 16:57:23 2012 +0800
+
+    fixed a typo in README: the syntax spec for get_reused_times was wrong. thanks 万珣新.
+
+commit 3119e55fbb978deaa7cc5fccddfa48c886e9aa06
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 28 15:39:21 2012 +0800
+
+    bugfix: recent versions of memcached do not support the "delay" argument for the "delete" command. we drop support for that too. also fixed the test case for the "stats sizes" command because the output format changes in recent versions of memcached.
+
+commit 6287033d6e231d48d2360c01d3c6d65bc85b8319
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 28 15:37:14 2012 +0800
+
+    Makefile: now OPENRESTY_PREFIX default to /usr/local/openresty-debug.
+
+commit f4b8053c733cb0b9c687bd0977c9961a234d2fb1
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Fri Feb 17 23:01:56 2012 +0800
+
+    fixed a test case for ngx_lua v0.5.0rc11+.
+
+commit ef19034c75f884d817ff328a1a58fe4ea5552061
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Fri Feb 17 22:57:11 2012 +0800
+
+    bugfix: fixed the return values in certain error conditions for the get() method. also improved the error messages in get().
+
+commit 624eae9e9985351ce9786d3773905c3f2746664f
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 14 11:19:30 2012 +0800
+
+    added a link to lua-resty-mysql in README "SEE ALSO".
+
+commit 56e27b0786856701e76c0755a411df87f09c7531
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Mon Feb 13 21:31:15 2012 +0800
+
+    some minor formatting fixes in README.
+
+commit 10e758c9fe2128eeb4d1a5e24245cda7900f68f2
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Mon Feb 13 21:26:22 2012 +0800
+
+    fixed a typo in README.
+
+commit 976ed10cf94bbc1042ced0ed4151a772ecb56be9
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Mon Feb 13 21:15:19 2012 +0800
+
+    fixed a typo in README.
+
+commit 4a1b27bdf6d30cd55861fe9d3ea775bfbc595c96
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 12 10:15:38 2012 +0800
+
+    fixed a missing semicolon in the Synopsis code sample. thanks smallfish.
+
+commit e8209f437a5c3911c368df472bc0aaed8f55d29e
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Tue Feb 7 09:44:38 2012 +0800
+
+    added a link to lua-resty-redis in README.
+
+commit cb95bd90f54837390441f2d1025d5deec3545566
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Mon Feb 6 20:10:16 2012 +0800
+
+    bugfix: fixed error handling when reading CRLF in get/gets.
+
+commit daa3e4fe30413aeb89c928f8e6df6828da183c55
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Mon Feb 6 12:33:30 2012 +0800
+
+    bugfix: we should not require "cjson"; eliminated the string concatenation operations when constructing the request data by taking advantage of the string table argument support in cosocket:send() method in ngx_lua 0.5.0rc3.
+
+commit 0f511b7e1d26578bff5467f30a3eb7436bbde9de
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 23:07:08 2012 +0800
+
+    added a passing test for cas failures.
+
+commit a91a0d48c33a16e21679c631e637ed4b6e767836
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 22:50:06 2012 +0800
+
+    updated README to reflect recent changes.
+
+commit 71d4678dd266b06ee6ebc549c1ec03d2d04dae17
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 22:48:14 2012 +0800
+
+    feature: added new method "cas"; bugfix: the response was not fully consumed for "get" and "gets" methods.
+
+commit eebe514296d59a7bb71b22eb3ab3c4c8cb8e89fc
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 21:16:08 2012 +0800
+
+    feature: implemented the "gets" method.
+
+commit 8f3472c54cdc5d487db06868c3a5fedb4b80ac09
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 20:23:58 2012 +0800
+
+    reindexed the tests.
+
+commit cbef65c270d19dd729f1727d0c52a1039e61a93b
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 20:17:24 2012 +0800
+
+    some test suite love.
+
+commit 0024600d44be8ab8c3b9bddb9fdef780ba1d1178
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 19:45:18 2012 +0800
+
+    fixed a source line exceeding 80 cols.
+
+commit 38c6ca0565eeeea623e1e59ef02e708e20c337d7
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 14:54:25 2012 +0800
+
+    renamed "settimeout" method to "set_timeout" to be consistent with other method names.
+
+commit c2dbb6fb05147298dc487e4fde0f42ab1ef85cab
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 14:46:13 2012 +0800
+
+    fixed the method name "set_keepalive" in docs; added new method "get_reused_times"; commented out debugging code that has some cost; added a test case for the connection pool support.
+
+commit b617933a8c91fbbc27807ce2831e49040c06a235
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 14:34:49 2012 +0800
+
+    added a (passing) test case for connect timeout.
+
+commit 6782cd4f83e63eaf26a1037c60da5c85b34cde12
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 14:32:15 2012 +0800
+
+    bugfix: we should unescape the keys for multi get.
+
+commit c822eea4ccb3f6d4459766e70bd80bd3dd4e0d52
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sun Feb 5 12:37:14 2012 +0800
+
+    fixed links to ngx_lua wiki page in README, thanks Calio Zhi. also added links to ngx_lua download page and ngx_openresty download page.
+
+commit 3f5dc1b61c09d7b65a99ed12b68cd93ddbe45e98
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 23:49:28 2012 +0800
+
+    feature: now "get" method accepts a lua table of multiple keys.
+
+commit 14fcd012e2d6c717ed2f894237f027e236543ae9
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:50:29 2012 +0800
+
+    added a TODO section to README.
+
+commit bedc3ce4dc053c24f1f699349fdd35142aeb9655
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:46:39 2012 +0800
+
+    feature: added new method "verbosity".
+
+commit 15a84ab4575c6f8a1abbc23a0ea01ce1a1adb27c
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:37:53 2012 +0800
+
+    documented the "quit" method.
+
+commit 59e323ddd0dfd65e58717e6966b674a224267fcc
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:36:26 2012 +0800
+
+    feature: added new method "quit".
+
+commit ff53701ed95679e58795fd9ec4d49d7132149c98
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:29:14 2012 +0800
+
+    feature: added new method "version"; also fixed places where we forgot to check nil data returned from cosocket:receive().
+
+commit 872604dc1c40583cd70d5cf9b1f32a545fc168d8
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 22:18:45 2012 +0800
+
+    feature: implemented method "stats".
+
+commit f0eff77feaf0fe45c7de4fd4726d1724ded7edfd
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 21:34:27 2012 +0800
+
+    docs: added the "Name" section to README.
+
+commit d74bfbc5568ebe1a4504a49b4142c256a9e43441
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 21:30:19 2012 +0800
+
+    docs: added new sections "Author", "Copyright and License", and "See Also" to README.
+
+commit 1895e924c699783a74dc5c94cdd68fca1c710d9d
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 21:27:22 2012 +0800
+
+    documented the "incr" and "decr" methods.
+
+commit 91c05c9641f53607a9a6e4dc050b4c49598671b0
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 21:24:09 2012 +0800
+
+    feature: implemented "decr" and "incr" memcached commands.
+
+commit 3324defe27338b75f47761f45cf8e6efe5b2008a
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 20:07:27 2012 +0800
+
+    added tests for "set" commands with nonzero exptime and "flush_all" commands with a nonzero delay argument.
+
+commit d6b6af0c0efe56ceea4096818970bf0e82f69667
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 20:00:14 2012 +0800
+
+    improved the delete test case a bit.
+
+commit 944a502b8fa1f7a105d8374d44579a67c65e5789
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 18:10:46 2012 +0800
+
+    added a (passing) test for flags.
+
+commit 0e7364862c2968410e52db9866e955fbbcc3a8e8
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 18:08:04 2012 +0800
+
+    implemented the "delete" method.
+
+commit b760db537fc418878427c3058cfcf233b73f2fe3
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 17:57:58 2012 +0800
+
+    now we make "get" method return the flags value too; also allow the "flush_all" method to accept the optional delay argument.
+
+commit 425086501d258ea6e5f1f593764bf8101a4f4750
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 17:43:10 2012 +0800
+
+    documented the "flush_all" method.
+
+commit c5baa2ed42229f73575291251e3042f52712cca3
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 17:40:05 2012 +0800
+
+    documented the "get" method.
+
+commit a68d15d906bbb45054c7b6a38c5cbff2c1755315
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 17:36:09 2012 +0800
+
+    some README formatting love.
+
+commit f2f07a94faae1359d92eba4479807acec80a87b5
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 17:34:26 2012 +0800
+
+    added a lot of documentation; also implemented the "add", "replace", "append", and "prepend" memcached commands.
+
+commit ec82ad54a589b8f643222b68d1ad02882959965b
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Sat Feb 4 16:37:54 2012 +0800
+
+    prevent writes to undeclared variables in module because it will lead to issues with undesired variable sharing among all the requests.
+
+commit e69c24610123ac1a51ef028eb9c9da8c886204f0
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Fri Feb 3 12:07:35 2012 +0800
+
+    added code comments for connecting to a unix domain socket and manually close the memcached connection.
+
+commit 207e1baf21cdb524743077afea495d737328e739
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:25:26 2012 +0800
+
+    fixed sample code in the doc and tests.
+
+commit f780a567c2bd9be42b98672800103f78e1a6bdf8
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:16:17 2012 +0800
+
+    removed the vim: tag.
+
+commit 988ada322bf8b38ce8909d8c1db07d7058306f99
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:12:24 2012 +0800
+
+    added a Makefile.
+
+commit b9bb0f433a583e4c65971a8f2601b120c00bb951
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:06:55 2012 +0800
+
+    more README love.
+
+commit 559545d4921ccc4b6f2c9ba7ef83f8e06446aeb5
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:02:33 2012 +0800
+
+    fixed link in README.
+
+commit ad04b38eb829747059a26ccda9b70fd08a61ca1d
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:01:40 2012 +0800
+
+    some README love.
+
+commit 9ef8f9269cb18b022a19c46daab26c917c1346af
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 21:00:06 2012 +0800
+
+    changed the API a bit.
+
+commit 6bb588525ec5cd5a7a15e9fe8c220c1743338454
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 20:39:39 2012 +0800
+
+    added a simple README.
+
+commit 5e0ada886c503e19f1072218044146231d3ef3ab
+Author: agentzh (章亦春) <agentzh@gmail.com>
+Date:   Thu Feb 2 20:37:20 2012 +0800
+
+    initial checkin.
